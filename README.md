@@ -1,1 +1,1 @@
-# fullscreen-canvas-painter
+# responsive-canvas-painter

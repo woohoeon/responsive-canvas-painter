@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+.canvas-layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5000000;
+    display: none;
+    background-color: #eee;
+}
+
+.canvas-layer-disable {
+    pointer-events: none;
+}

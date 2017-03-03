@@ -1,14 +1,31 @@
 @CHARSET "UTF-8";
 
+
+.logo {
+    font-size: 70px;
+    text-align: center;
+    line-height: 70px;
+}
+
+.description {
+    padding-top: 20px;
+    text-align: center;
+}
+
 .canvas-layer {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 5000000;
-    display: none;
-    background-color: #eee;
+	background-color: #444;
+	position: relative;
+	left: 0;
+	top: 0;
+	margin: 0px auto;
+	z-index: 5000000;
+	display: none;
 }
 
 .canvas-layer-disable {
-    pointer-events: none;
+	pointer-events: none;
+}
+
+.subtitle {
+    padding-top: 30px;
 }

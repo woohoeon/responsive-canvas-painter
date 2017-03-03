@@ -6,11 +6,33 @@
 <link rel="stylesheet" href="./css/painter.css" type="text/css">
 </head>
 <body>
+	<h1 class="logo">responsive-canvas-painter</h1>
+	<div class="description">
+		<h2 class="subtitle">Demo</h2>
+	</div>
 	<div id="section">
 		<canvas class="canvas-layer" id="canvasLayer"></canvas>
 		<canvas class="canvas-layer" id="canvasInterfaceLayer"></canvas>
 	</div>
-	<script type="text/javascript" src="/js/jquery-1.12.0.min.js"></script>
+	<div class="description">
+		<h2 class="subtitle">License</h2>
+		<p class="lead">MIT License <br>Copyright (c) 2017 ho-un Woo</p>
+	</div>
 	<script type="text/javascript" src="/js/painter.js"></script>
+	<script>
+		(() => {
+			
+			const painter = canvasPainter('section', 'canvasLayer', 'canvasInterfaceLayer', '500', '500');
+			
+			painter.init({
+				type : 'pen', 
+				weight : 3, 
+				cap : 'round',
+				color : '#ff2988'
+			});
+			
+		})();
+	</script>
+
 </body>
 </html>

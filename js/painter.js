@@ -2,184 +2,166 @@
  * painter.js
  */
 
-const _touch = 'click', 
-_start = 'mousedown', 
+const _start = 'mousedown', 
 _move = 'mousemove',
 _end = 'mouseup',
-_out = 'mouseout',
-red = '#ff0000',
-blue = '#00b1ff',
-yellow = '#ffe600',
-green = '#00ff00',
-black = '#1a1a1a',
-VERTICALITY = 'verticality',
-HORIZONTALITY = 'horizontality';
+_out = 'mouseout';
 
-const pen = (function() {
+const Pen = (() => {
 	
-	let initialized = null,
-	color = red,
-	weight = 3,
-	type = 'pen',
-	join = 'round',
-	cap = 'round',
-	mode = null;
+	const operation = 'source-over';
+	
+	let color, 
+	weight, 
+	cap;
 	
 	return {
-	    getType : function() {
-	    	return type;
+	    getOperation : () => {
+	    	return operation;
 		},
-		getColor : function() {
+		getColor : () => {
 			return color;
 		},
-		getWeight : function() {
+		getWeight : () => {
 			return weight;
 		},
-		getJoin : function() {
-			return join;
-		},
-		getCap : function() {
+		getCap : () => {
 			return cap;
+		},
+		setWeight : w => {
+			weight = w;
+		},
+		setData : data => {
+			color = data.color;
+			weight = data.weight;
+			cap = data.cap;
 		}
 	};
-}());
-
-const controller = (function() {
 	
-	const canvas = document.getElementById('canvasLayer'),
-	canvasI = document.getElementById('canvasInterfaceLayer');
-	$canvasLayer = $('#canvasLayer'),
-	$canvasInterfaceLayer = $('#canvasInterfaceLayer'),
-	ctx = canvas.getContext('2d'),
-	ctxI = canvasI.getContext('2d');
-	
-	let section = document.getElementById('section'), 
-	paintStyle = getComputedStyle(section),
-	mouse = { x : 0, y : 0 },
-	lines = [ ],
-	lineOptions = [ ],
-	modes = [ ],
-	canvasOffset = $canvasInterfaceLayer.offset(),
-	offsetX = canvasOffset.left,
-	offsetY = canvasOffset.top,
-    offsetw = 0,
-    offseth = 0,
-	startX, startY, mouseX, mouseY,
-    resizescale = 0,
-	isDown = false;
-	
-	if ($canvasLayer.hasClass('canvas-layer-disable')) {
-		$canvasLayer.removeClass('canvas-layer-disable');
-	}
-	if ($canvasInterfaceLayer.hasClass('canvas-layer-disable')) {
-		$canvasInterfaceLayer.removeClass('canvas-layer-disable');
-	}
-	
-	canvas.width = parseInt(paintStyle.getPropertyValue('width'));
-	canvas.height = parseInt(paintStyle.getPropertyValue('height')) ? 0 : window.innerHeight;
-	canvasI.width = parseInt(paintStyle.getPropertyValue('width'));
-	canvasI.height = parseInt(paintStyle.getPropertyValue('height')) ? 0 : window.innerHeight;
-	
-	function penHandleMouseDown(e) {
-		ctx.beginPath();
-        if (resizescale === 0) {
-            ctx.moveTo(mouse.x, mouse.y);
-        } else {
-            if (offsetw !== 0) {
-                ctx.moveTo(((mouse.x - offsetw) / resizescale), (mouse.y / resizescale));
-            } else if (offseth !== 0) {
-                ctx.moveTo((mouse.x / resizescale), ((mouse.y - offseth) / resizescale));
-            } else {
-                ctx.moveTo((mouse.x / resizescale), (mouse.y / resizescale));
-            }
-        }
-        canvas.addEventListener(_move, onPaint, false);
-    };
-    
-    function penHandleMouseUp() {
-        canvas.removeEventListener(_move, onPaint, false);
-    };
-    
-    function onPaint() {
-         let pointerX = 0, 
-         pointerY = 0;
-         
-         if (resizescale === 0) {
-             pointerX = mouse.x;
-             pointerY = mouse.y;
-         } else {
-             if (offsetw !== 0) {
-                 pointerX = ((mouse.x - offsetw) / resizescale);
-                 pointerY = (mouse.y / resizescale);
-             } else if (offseth !== 0) {
-                 pointerX = (mouse.x / resizescale);
-                 pointerY = ((mouse.y - offseth) / resizescale);
-             } else {
-                 pointerX = (mouse.x / resizescale);
-                 pointerY = (mouse.y / resizescale);
-             }
-         }
-         
-         if (pen.getType() === 'pen'){
-             ctx.globalCompositeOperation = 'source-over';
-             ctx.lineTo(pointerX, pointerY);
-             ctx.stroke();
-         }
-    }
-    
-    function getPageX(e) {
-    	let pageX = 0;
-    	pageX = e.pageX;
-    	return pageX;
-    }
-    
-    function getPageY(e) {
-    	let pageY = 0;
-    	pageY = e.pageY;
-    	return pageY;    
-    }
-    
-	return {
-		init : function() {
-		    ctx.lineWidth = pen.getWeight(),
-		    ctx.lineJoin = pen.getJoin(),
-		    ctx.lineCap = pen.getCap();
-		    ctx.strokeStyle = pen.getColor();
-		    
-		    $canvasLayer.show();
-		    $canvasInterfaceLayer.addClass('canvas-layer-disable');
-		    
-            canvas.removeEventListener(_start, function(e) {
-            	penHandleMouseDown(e);
-            }, false);
-            canvas.removeEventListener(_move, function(e) {
-            	mouse.x = getPageX(e) - this.offsetLeft;
-            	mouse.y = getPageY(e) - this.offsetTop;
-            }, false);
-            canvas.removeEventListener(_end, function(e) {
-            	penHandleMouseUp();
-            }, false);
-            canvas.removeEventListener(_out, function(e) {
-            	penHandleMouseUp();
-            }, false);
-            
-            canvas.addEventListener(_start, function(e) {
-            	penHandleMouseDown(e);
-            }, false);
-            canvas.addEventListener(_move, function(e) {
-            	mouse.x = getPageX(e) - this.offsetLeft;
-            	mouse.y = getPageY(e) - this.offsetTop;
-            }, false);
-            canvas.addEventListener(_end, function(e) {
-            	penHandleMouseUp();
-            }, false);
-            canvas.addEventListener(_out, function(e) {
-            	penHandleMouseUp();
-            }, false);
-		}
-	}
-}());
-
-(function() {
-	controller.init();
 })();
+
+const canvasPainter = (area, id, interfaceId, canvasW, canvasH) => {
+	
+	const canvas = document.getElementById(id),
+	canvasI = document.getElementById(interfaceId),
+	ctx = canvas.getContext('2d'),
+	ctxI = canvasI.getContext('2d'),
+	section = document.getElementById(area), 
+	paintStyle = getComputedStyle(section);
+
+	canvas.width = canvasW;
+	canvas.height = canvasH;
+	canvasI.width = canvasW;
+	canvasI.height = canvasH;
+	
+	let chose,
+	drawData,
+	lineScale = 1,
+	mouse = { x : 0, y : 0 },
+	windowW = window.innerWidth,
+	windowH = window.innerHeight,
+	offsetLeft = canvas.offsetLeft,
+	offsetTop = canvas.offsetTop;
+	
+	const _handleMouseDown = () => {
+		ctx.beginPath();
+		let mouseX = canvas.offsetLeft != 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
+		let mouseY = canvas.offsetTop != 0 ? (mouse.y - canvas.offsetTop) : mouse.y; 
+		ctx.moveTo(mouseX, mouseY);
+		canvas.addEventListener(_move, _onPaint, false);
+	};
+	
+	const _handleMouseMove = (e) => {
+		mouse.x = e.pageX;
+		mouse.y = e.pageY;
+	};
+	
+	const _handleMouseUp = () => {
+		canvas.removeEventListener(_move, _onPaint, false);
+		drawData = canvas.toDataURL();
+	};
+	
+	const _onPaint = () => {
+		let mouseX = canvas.offsetLeft != 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
+		let mouseY = canvas.offsetTop != 0 ? (mouse.y - canvas.offsetTop) : mouse.y; 
+		ctx.lineTo(mouseX, mouseY);
+		ctx.stroke();
+	};
+	
+	const _setCtx = () => {
+		ctx.globalCompositeOperation = chose.getOperation();
+		ctx.strokeStyle = chose.getColor();
+		ctx.lineWidth = (chose.getWeight() * lineScale);
+		ctx.lineCap = chose.getCap();
+		
+		Pen.setWeight((chose.getWeight() * lineScale));
+	};
+	
+	const _resizeCanvas = () => {
+		
+		setTimeout(() => {
+			
+		    const canvasW = canvas.width,
+		    canvasH = canvas.height,
+		    newW = window.innerWidth,
+		    newH = window.innerHeight,
+		    scaleW = (newW / windowW),
+		    scaleH = (newH / windowH),
+		    newX = (canvasW * scaleW),
+		    newY = (canvasH * scaleH);
+		    
+	    	canvas.width = newX;
+	    	canvas.height = newY;
+	    	canvasI.width = newX;
+	    	canvasI.height = newY;
+		    windowW = newW;
+		    windowH = newH;
+		    offsetLeft = canvas.offsetLeft;
+			offsetTop = canvas.offsetTop;
+		    
+		    if (scaleW >= 1 && scaleH >= 1) {
+		    	lineScale = scaleW > scaleH ? scaleW : scaleH; 
+		    }
+		    
+		    if (scaleW <= 1 && scaleH <= 1) {
+		    	lineScale = scaleW > scaleH ? scaleH : scaleW; 
+		    }
+		    
+		    _setCtx();
+		    
+			if (drawData) {
+				const img = new Image();
+				img.onload = () => {
+					canvas.getContext('2d').drawImage(img, 0, 0, newX, newY);
+				};
+				img.src = drawData;
+			}
+		    
+		}, 250);
+		
+	};
+
+	window.addEventListener('resize', _resizeCanvas, false);
+	
+	return {
+		init : (data = { type : 'pen', weight : 1, cap : 'round', color : '#000' }) => {
+			
+			switch (data.type) {
+			case 'pen':
+				Pen.setData(data);
+				chose = Pen;
+				canvas.style.display = 'block';
+				canvasI.style.display = 'none';
+				break;
+			}
+			
+			_setCtx();
+			
+            canvas.addEventListener(_start, _handleMouseDown, false);
+            canvas.addEventListener(_move, _handleMouseMove, false);
+            canvas.addEventListener(_end, _handleMouseUp, false);
+            canvas.addEventListener(_out, _handleMouseUp, false);
+		}
+	};
+	
+};

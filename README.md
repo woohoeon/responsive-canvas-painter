@@ -1,1 +1,55 @@
 # responsive-canvas-painter
+A responsive HTML5 canvas painter
+
+## Getting Started
+### Example
+
+**css:**
+
+```html
+<link rel="stylesheet" href="css/painter.css" type="text/css">
+```
+
+**html:**
+
+```html
+<div id="section">
+	<canvas class="canvas-layer" id="canvasLayer"></canvas>
+	<canvas class="canvas-layer" id="canvasInterfaceLayer"></canvas>
+</div>
+```
+
+**javascript:**
+
+```html
+<script type="text/javascript" src="js/painter.js"></script>
+```
+
+It can be initialised with optional parameters.
+
+```javascript
+(() => {
+	
+	const painter = canvasPainter('section', 'canvasLayer', 'canvasInterfaceLayer', '500', '500');
+	
+	painter.init({
+		type : 'pen', 
+		weight : 3, 
+		cap : 'round',
+		color : '#ff2988'
+	});
+	
+})();
+```
+
+or
+
+```javascript
+(() => {
+	
+	const painter = canvasPainter('section', 'canvasLayer', 'canvasInterfaceLayer', '500', '500');
+	
+	painter.init();
+	
+})();
+```

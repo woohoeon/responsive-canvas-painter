@@ -65,8 +65,8 @@ const canvasPainter = (area, id, interfaceId, canvasW, canvasH) => {
 	
 	const _handleMouseDown = () => {
 		ctx.beginPath();
-		let mouseX = canvas.offsetLeft != 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
-		let mouseY = canvas.offsetTop != 0 ? (mouse.y - canvas.offsetTop) : mouse.y; 
+		const mouseX = canvas.offsetLeft != 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
+		const mouseY = canvas.offsetTop != 0 ? (mouse.y - canvas.offsetTop) : mouse.y; 
 		ctx.moveTo(mouseX, mouseY);
 		canvas.addEventListener(_move, _onPaint, false);
 	};
@@ -82,8 +82,8 @@ const canvasPainter = (area, id, interfaceId, canvasW, canvasH) => {
 	};
 	
 	const _onPaint = () => {
-		let mouseX = canvas.offsetLeft != 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
-		let mouseY = canvas.offsetTop != 0 ? (mouse.y - canvas.offsetTop) : mouse.y; 
+		const mouseX = canvas.offsetLeft != 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
+		const mouseY = canvas.offsetTop != 0 ? (mouse.y - canvas.offsetTop) : mouse.y; 
 		ctx.lineTo(mouseX, mouseY);
 		ctx.stroke();
 	};

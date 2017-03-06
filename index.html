@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <title>responsive canvas painter</title>
 <link rel="stylesheet" href="css/painter.css" type="text/css">
+<style>
+a {
+    color: #0088cc;
+    text-decoration: none;
+}
+.logo {
+    font-size: 60px;
+    text-align: center;
+    line-height: 60px;
+}
+.description {
+    text-align: center;
+}
+.subtitle {
+    padding-top: 30px;
+}
+</style>
 </head>
 <body>
 	<h1 class="logo">responsive-canvas-painter</h1>
@@ -16,23 +33,22 @@
 	</div>
 	<div class="description">
 		<h2 class="subtitle">License</h2>
-		<p class="lead">MIT License <br>Copyright (c) 2017 ho-un Woo</p>
+		<p class="lead">MIT License. Copyright (c) 2017 <a href="http://github.com/woohoeon">ho-un Woo</a></p>
 	</div>
 	<script type="text/javascript" src="js/painter.js"></script>
 	<script>
 		(() => {
 			
-			const painter = canvasPainter('section', 'canvasLayer', 'canvasInterfaceLayer', '500', '500');
+			const painter = canvasPainter('section', 'canvasLayer', 'canvasInterfaceLayer', '700', '500');
 			
 			painter.init({
 				type : 'pen', 
 				weight : 3, 
 				cap : 'round',
-				color : '#ff2988'
+				color : '#ff5fa6'
 			});
 			
 		})();
 	</script>
-
 </body>
 </html>

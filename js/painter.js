@@ -16,8 +16,8 @@ const Pen = (() => {
 	cap;
 	
 	return {
-	    getOperation : () => {
-	    	return operation;
+		getOperation : () => {
+			return operation;
 		},
 		getColor : () => {
 			return color;
@@ -65,8 +65,8 @@ const canvasPainter = (area, id, interfaceId, canvasW, canvasH) => {
 	
 	const _handleMouseDown = () => {
 		ctx.beginPath();
-		const mouseX = canvas.offsetLeft != 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
-		const mouseY = canvas.offsetTop != 0 ? (mouse.y - canvas.offsetTop) : mouse.y; 
+		const mouseX = canvas.offsetLeft !== 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
+		const mouseY = canvas.offsetTop !== 0 ? (mouse.y - canvas.offsetTop) : mouse.y; 
 		ctx.moveTo(mouseX, mouseY);
 		canvas.addEventListener(_move, _onPaint, false);
 	};
@@ -101,34 +101,34 @@ const canvasPainter = (area, id, interfaceId, canvasW, canvasH) => {
 		
 		setTimeout(() => {
 			
-		    const canvasW = canvas.width,
-		    canvasH = canvas.height,
-		    newW = window.innerWidth,
-		    newH = window.innerHeight,
-		    scaleW = (newW / windowW),
-		    scaleH = (newH / windowH),
-		    newX = (canvasW * scaleW),
-		    newY = (canvasH * scaleH);
-		    
-	    	canvas.width = newX;
-	    	canvas.height = newY;
-	    	canvasI.width = newX;
-	    	canvasI.height = newY;
-		    windowW = newW;
-		    windowH = newH;
-		    offsetLeft = canvas.offsetLeft;
+			const canvasW = canvas.width,
+			canvasH = canvas.height,
+			newW = window.innerWidth,
+			newH = window.innerHeight,
+			scaleW = (newW / windowW),
+			scaleH = (newH / windowH),
+			newX = (canvasW * scaleW),
+			newY = (canvasH * scaleH);
+			
+			canvas.width = newX;
+			canvas.height = newY;
+			canvasI.width = newX;
+			canvasI.height = newY;
+			windowW = newW;
+			windowH = newH;
+			offsetLeft = canvas.offsetLeft;
 			offsetTop = canvas.offsetTop;
-		    
-		    if (scaleW >= 1 && scaleH >= 1) {
-		    	lineScale = scaleW > scaleH ? scaleW : scaleH; 
-		    }
-		    
-		    if (scaleW <= 1 && scaleH <= 1) {
-		    	lineScale = scaleW > scaleH ? scaleH : scaleW; 
-		    }
-		    
-		    _setCtx();
-		    
+			
+			if (scaleW >= 1 && scaleH >= 1) {
+				lineScale = scaleW > scaleH ? scaleW : scaleH; 
+			}
+			
+			if (scaleW <= 1 && scaleH <= 1) {
+				lineScale = scaleW > scaleH ? scaleH : scaleW; 
+			}
+			
+			_setCtx();
+			
 			if (drawData) {
 				const img = new Image();
 				img.onload = () => {
@@ -136,7 +136,7 @@ const canvasPainter = (area, id, interfaceId, canvasW, canvasH) => {
 				};
 				img.src = drawData;
 			}
-		    
+			
 		}, 250);
 		
 	};
@@ -157,10 +157,10 @@ const canvasPainter = (area, id, interfaceId, canvasW, canvasH) => {
 			
 			_setCtx();
 			
-            canvas.addEventListener(_start, _handleMouseDown, false);
-            canvas.addEventListener(_move, _handleMouseMove, false);
-            canvas.addEventListener(_end, _handleMouseUp, false);
-            canvas.addEventListener(_out, _handleMouseUp, false);
+			canvas.addEventListener(_start, _handleMouseDown, false);
+			canvas.addEventListener(_move, _handleMouseMove, false);
+			canvas.addEventListener(_end, _handleMouseUp, false);
+			canvas.addEventListener(_out, _handleMouseUp, false);
 		}
 	};
 	

@@ -1,6 +1,7 @@
 /**
  * painter.js
  */
+'use strict';
 
 const _start = 'mousedown', 
 _move = 'mousemove',

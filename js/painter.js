@@ -40,14 +40,12 @@ const Pen = (() => {
 	
 })();
 
-const canvasPainter = (area, id, interfaceId, canvasW, canvasH) => {
+const canvasPainter = (id, interfaceId, canvasW, canvasH) => {
 	
 	const canvas = document.getElementById(id),
 	canvasI = document.getElementById(interfaceId),
 	ctx = canvas.getContext('2d'),
-	ctxI = canvasI.getContext('2d'),
-	section = document.getElementById(area), 
-	paintStyle = getComputedStyle(section);
+	ctxI = canvasI.getContext('2d');
 
 	canvas.width = canvasW;
 	canvas.height = canvasH;

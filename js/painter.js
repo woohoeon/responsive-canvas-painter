@@ -82,8 +82,8 @@ const canvasPainter = (area, id, interfaceId, canvasW, canvasH) => {
 	};
 	
 	const _onPaint = () => {
-		const mouseX = canvas.offsetLeft != 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
-		const mouseY = canvas.offsetTop != 0 ? (mouse.y - canvas.offsetTop) : mouse.y; 
+		const mouseX = canvas.offsetLeft !== 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
+		const mouseY = canvas.offsetTop !== 0 ? (mouse.y - canvas.offsetTop) : mouse.y; 
 		ctx.lineTo(mouseX, mouseY);
 		ctx.stroke();
 	};

@@ -62,6 +62,13 @@ const canvasPainter = (id, interfaceId, canvasW, canvasH) => {
 	offsetLeft = canvas.offsetLeft,
 	offsetTop = canvas.offsetTop;
 	
+	const _onPaint = () => {
+		const mouseX = canvas.offsetLeft !== 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
+		const mouseY = canvas.offsetTop !== 0 ? (mouse.y - canvas.offsetTop) : mouse.y; 
+		ctx.lineTo(mouseX, mouseY);
+		ctx.stroke();
+	};
+	
 	const _handleMouseDown = () => {
 		ctx.beginPath();
 		const mouseX = canvas.offsetLeft !== 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
@@ -79,14 +86,7 @@ const canvasPainter = (id, interfaceId, canvasW, canvasH) => {
 		canvas.removeEventListener(_move, _onPaint, false);
 		drawData = canvas.toDataURL();
 	};
-	
-	const _onPaint = () => {
-		const mouseX = canvas.offsetLeft !== 0 ? (mouse.x - canvas.offsetLeft) : mouse.x; 
-		const mouseY = canvas.offsetTop !== 0 ? (mouse.y - canvas.offsetTop) : mouse.y; 
-		ctx.lineTo(mouseX, mouseY);
-		ctx.stroke();
-	};
-	
+		
 	const _setCtx = () => {
 		ctx.globalCompositeOperation = chose.getOperation();
 		ctx.strokeStyle = chose.getColor();

@@ -30,7 +30,7 @@ It can be initialised with optional parameters.
 ```javascript
 (() => {
 	
-	const painter = canvasPainter('section', 'canvasLayer', 'canvasInterfaceLayer', '500', '500');
+	const painter = canvasPainter('canvasLayer', 'canvasInterfaceLayer', '700', '500');
 	
 	painter.init({
 		type : 'pen', 
@@ -47,7 +47,7 @@ or
 ```javascript
 (() => {
 	
-	const painter = canvasPainter('section', 'canvasLayer', 'canvasInterfaceLayer', '500', '500');
+	const painter = canvasPainter('canvasLayer', 'canvasInterfaceLayer', '700', '500');
 	
 	painter.init();
 	

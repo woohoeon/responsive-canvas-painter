@@ -1,8 +1,9 @@
 # responsive-canvas-painter
 A responsive HTML5 canvas painter
 
-## Getting Started
-### Example
+#### [Online Demo](https://woohoeon.github.io/responsive-canvas-painter/)
+
+## Example
 
 **css:**
 

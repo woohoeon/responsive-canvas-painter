@@ -17,18 +17,10 @@ const Pen = (() => {
 	cap;
 	
 	return {
-		getOperation : () => {
-			return operation;
-		},
-		getColor : () => {
-			return color;
-		},
-		getWeight : () => {
-			return weight;
-		},
-		getCap : () => {
-			return cap;
-		},
+		getOperation : () => operation,
+		getColor : () => color,
+		getWeight : () => weight,
+		getCap : () => cap,
 		setWeight : w => {
 			weight = w;
 		},

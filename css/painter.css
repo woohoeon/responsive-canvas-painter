@@ -2,11 +2,7 @@
 
 .canvas-layer {
 	background-color: #444;
-	position: relative;
-	left: 0;
-	top: 0;
 	margin: 0px auto;
-	z-index: 5000000;
 	display: none;
 }
 

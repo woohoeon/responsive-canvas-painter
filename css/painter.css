@@ -4,6 +4,7 @@
 	background-color: #444;
 	margin: 0px auto;
 	display: none;
+	cursor: pointer;
 }
 
 .canvas-layer-disable {
